@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <h1>BMI Calculator</h1>
+            <div class="content">
+                <div class="input">
+                    <label for="height">Height (cm)</label>
+                    <input type="number" id="height" placeholder="Enter height">
+                </div>
+                <div class="input">
+                    <label for="weight">Weight (kg)</label>
+                    <input type="number" id="weight" placeholder="Enter weight">
+                </div>
+                <button id="calculate">Calculate BMI</button>
+            </div>
+            <div class="result">
+                <p>Your BMI is</p>
+                <div id="result">00.00</div>
+                <p class="comment"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('calculate').addEventListener('click', function () {
+            const height = parseFloat(document.getElementById('height').value);
+            const weight = parseFloat(document.getElementById('weight').value);
+            const result = document.getElementById('result');
+            const comment = document.querySelector('.comment');
+
+            if (!height || !weight || height <= 0 || weight <= 0) {
+                result.textContent = '00.00';
+                comment.textContent = 'Please enter valid height and weight.';
+                return;
+            }
+
+            const bmi = weight / ((height / 100) ** 2);
+            result.textContent = bmi.toFixed(2);
+
+            if (bmi < 18.5) {
+                comment.textContent = 'You are underweight.';
+            } else if (bmi >= 18.5 && bmi < 25) {
+                comment.textContent = 'You have a normal weight.';
+            } else if (bmi >= 25 && bmi < 30) {
+                comment.textContent = 'You are overweight.';
+            } else {
+                comment.textContent = 'You are obese.';
+            }
+        });
+    </script>
+</body>
+</html>
